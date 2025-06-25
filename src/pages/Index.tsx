@@ -1,51 +1,12 @@
+
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
-import BookingForm from "@/components/BookingForm";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import ApartmentCard, { ApartmentProps } from "@/components/ApartmentCard";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, Wifi, Utensils, Waves, LifeBuoy, MapPin, Coffee } from "lucide-react";
+import { ArrowRight, Satellite, TrendingUp, Database, Map, BarChart3, Clock, Eye } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-
-// Sample apartments data
-const featuredApartments: ApartmentProps[] = [
-  {
-    id: "1",
-    name: "Deluxe Sea View Suite",
-    description: "Luxurious suite with panoramic sea views, modern amenities, and a private balcony.",
-    price: 180,
-    capacity: 2,
-    size: 45,
-    image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop",
-    location: "Beachfront",
-    features: ["Wi-Fi", "Kitchen", "Bathroom", "Air Conditioning", "TV", "Balcony"]
-  },
-  {
-    id: "2",
-    name: "Premium Family Apartment",
-    description: "Spacious apartment ideal for families, with full kitchen and stunning coastal views.",
-    price: 250,
-    capacity: 4,
-    size: 75,
-    image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop",
-    location: "Second row",
-    features: ["Wi-Fi", "Kitchen", "Bathroom", "Air Conditioning", "TV", "Washing Machine"]
-  },
-  {
-    id: "3",
-    name: "Executive Beach Studio",
-    description: "Elegant studio with direct beach access, modern design, and premium finishes.",
-    price: 150,
-    capacity: 2,
-    size: 35,
-    image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=800&h=600&fit=crop",
-    location: "Beachfront",
-    features: ["Wi-Fi", "Kitchenette", "Bathroom", "Air Conditioning", "TV"]
-  }
-];
 
 export default function Index() {
   const { t } = useLanguage();
@@ -55,38 +16,62 @@ export default function Index() {
     window.scrollTo(0, 0);
   }, []);
   
-  // Feature items
+  // How it works steps
+  const processSteps = [
+    {
+      icon: <Satellite className="h-12 w-12 text-primary" />,
+      title: "Satellite Data Collection",
+      description: "Automated monthly retrieval of Sentinel satellite imagery for target monitoring areas"
+    },
+    {
+      icon: <TrendingUp className="h-12 w-12 text-primary" />,
+      title: "Environmental Analysis",
+      description: "AI-powered analysis of NDVI, soil conditions, water presence, and vegetation health"
+    },
+    {
+      icon: <Database className="h-12 w-12 text-primary" />,
+      title: "Data Storage & Tracking",
+      description: "Secure storage in PostgreSQL/PostGIS database with temporal tracking capabilities"
+    },
+    {
+      icon: <BarChart3 className="h-12 w-12 text-primary" />,
+      title: "Report Generation",
+      description: "Automated comparative reports showing environmental changes and trends over time"
+    }
+  ];
+
+  // Key features
   const features = [
     {
-      icon: <Waves className="h-8 w-8 text-primary" />,
-      title: t.home.amenities.features.beachfront.title,
-      description: t.home.amenities.features.beachfront.description
+      icon: <Clock className="h-8 w-8 text-primary" />,
+      title: "Monthly Automated Updates",
+      description: "System automatically processes new satellite imagery every month without manual intervention"
     },
     {
-      icon: <LifeBuoy className="h-8 w-8 text-primary" />,
-      title: t.home.amenities.features.pools.title,
-      description: t.home.amenities.features.pools.description
+      icon: <TrendingUp className="h-8 w-8 text-primary" />,
+      title: "NDVI & Environmental Indices",
+      description: "Advanced analysis of vegetation health, soil moisture, and land cover changes"
     },
     {
-      icon: <Utensils className="h-8 w-8 text-primary" />,
-      title: t.home.amenities.features.restaurant.title,
-      description: t.home.amenities.features.restaurant.description
+      icon: <BarChart3 className="h-8 w-8 text-primary" />,
+      title: "Interactive Comparisons",
+      description: "Side-by-side monthly comparisons with visual charts and statistical analysis"
     },
     {
-      icon: <Wifi className="h-8 w-8 text-primary" />,
-      title: t.home.amenities.features.wifi.title,
-      description: t.home.amenities.features.wifi.description
-    },
-    {
-      icon: <Coffee className="h-8 w-8 text-primary" />,
-      title: t.home.amenities.features.bar.title,
-      description: t.home.amenities.features.bar.description
-    },
-    {
-      icon: <MapPin className="h-8 w-8 text-primary" />,
-      title: t.home.amenities.features.location.title,
-      description: t.home.amenities.features.location.description
+      icon: <Map className="h-8 w-8 text-primary" />,
+      title: "User-Friendly Interface",
+      description: "Simple map interface and reporting dashboard accessible to all users"
     }
+  ];
+
+  // Technology stack
+  const technologies = [
+    "Python & ArcGIS Pro",
+    "PostgreSQL/PostGIS",
+    "Dash/Streamlit",
+    "Sentinel Satellite API",
+    "Machine Learning Models",
+    "Automated Workflows"
   ];
   
   return (
@@ -97,157 +82,158 @@ export default function Index() {
         {/* Hero Section */}
         <HeroSection />
         
-        {/* Welcome Section */}
-        <section id="welcome" className="section">
+        {/* How It Works Section */}
+        <section id="how-it-works" className="section">
           <div className="container">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="animate-fade-in [animation-delay:100ms]">
-                <span className="text-sm text-primary font-medium uppercase tracking-wider">
-                  {t.home.welcome.subtitle}
-                </span>
-                <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6">
-                  {t.home.welcome.title}
-                </h2>
-                <p className="text-muted-foreground mb-6">
-                  {t.home.welcome.description1}
-                </p>
-                <p className="text-muted-foreground mb-8">
-                  {t.home.welcome.description2}
-                </p>
-                <Button asChild className="btn-primary">
-                  <Link to="/about">
-                    {t.home.welcome.learnMore} <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </div>
-              
-              <div className="relative animate-fade-in [animation-delay:300ms]">
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden">
-                  <img 
-                    src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&h=600&fit=crop"
-                    alt="Seaside view" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="absolute -bottom-6 -left-6 w-2/3 rounded-2xl overflow-hidden shadow-xl">
-                  <img 
-                    src="https://images.unsplash.com/photo-1545579133-99bb5ab189bd?w=400&h=300&fit=crop"
-                    alt="Luxury apartment interior" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="absolute -top-6 -right-6 w-1/2 rounded-2xl overflow-hidden shadow-xl">
-                  <img 
-                    src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=400&h=300&fit=crop"
-                    alt="Pool view" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* Booking Form Section */}
-        <section className="relative py-20 bg-gradient-to-r from-sea-light to-white dark:from-sea-dark dark:to-background overflow-hidden">
-          <div className="container relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="animate-fade-in">
-                <span className="text-sm text-primary font-medium uppercase tracking-wider">
-                  {t.home.booking.subtitle}
-                </span>
-                <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6">
-                  {t.home.booking.title}
-                </h2>
-                <p className="text-muted-foreground mb-6">
-                  {t.home.booking.description}
-                </p>
-                <ul className="space-y-3 mb-8">
-                  {t.home.booking.benefits.map((item, index) => (
-                    <li key={index} className="flex items-center">
-                      <div className="h-5 w-5 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3">
-                        <ArrowRight className="h-3 w-3" />
-                      </div>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              <BookingForm />
-            </div>
-          </div>
-          
-          {/* Decorative elements */}
-          <div className="absolute top-0 right-0 w-1/3 h-full opacity-10">
-            <div className="absolute top-10 right-10 w-64 h-64 rounded-full bg-primary/50 blur-3xl" />
-            <div className="absolute bottom-10 right-40 w-48 h-48 rounded-full bg-sea-light blur-3xl" />
-          </div>
-        </section>
-        
-        {/* Featured Apartments */}
-        <section className="section">
-          <div className="container">
-            <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-in">
+            <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
               <span className="text-sm text-primary font-medium uppercase tracking-wider">
-                {t.home.featuredApartments.subtitle}
+                Process Overview
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">
-                {t.home.featuredApartments.title}
+                How Our System Works
               </h2>
               <p className="text-muted-foreground">
-                {t.home.featuredApartments.description}
+                Our automated pipeline transforms raw satellite data into actionable environmental insights
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {featuredApartments.map((apartment, index) => (
-                <div key={apartment.id} className="animate-fade-in" style={{ animationDelay: `${(index + 1) * 100}ms` }}>
-                  <ApartmentCard apartment={apartment} />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {processSteps.map((step, index) => (
+                <div 
+                  key={index} 
+                  className="glass-card p-6 rounded-xl text-center animate-fade-in"
+                  style={{ animationDelay: `${(index + 1) * 200}ms` }}
+                >
+                  <div className="mb-4 flex justify-center">
+                    <div className="p-3 rounded-full bg-primary/10">
+                      {step.icon}
+                    </div>
+                  </div>
+                  <div className="mb-2 text-sm text-primary font-semibold">
+                    Step {index + 1}
+                  </div>
+                  <h3 className="text-lg font-semibold mb-3">{step.title}</h3>
+                  <p className="text-muted-foreground text-sm">{step.description}</p>
                 </div>
               ))}
             </div>
-            
-            <div className="text-center mt-12">
-              <Button asChild className="btn-primary">
-                <Link to="/apartments">
-                  {t.home.featuredApartments.viewAll} <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
           </div>
         </section>
-        
-        {/* Testimonials Section */}
-        <TestimonialsSection />
         
         {/* Features Section */}
         <section className="section bg-card">
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-in">
               <span className="text-sm text-primary font-medium uppercase tracking-wider">
-                {t.home.amenities.subtitle}
+                Key Features
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">
-                {t.home.amenities.title}
+                Powerful Environmental Monitoring
               </h2>
               <p className="text-muted-foreground">
-                {t.home.amenities.description}
+                Advanced satellite imagery analysis with automated reporting and trend detection
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {features.map((feature, index) => (
                 <div 
                   key={index} 
-                  className="glass-card p-6 rounded-xl animate-fade-in flex flex-col items-center text-center"
+                  className="glass-card p-6 rounded-xl animate-fade-in flex items-start space-x-4"
                   style={{ animationDelay: `${(index + 1) * 100}ms` }}
                 >
-                  <div className="mb-4 p-3 rounded-full bg-primary/10">
+                  <div className="p-3 rounded-full bg-primary/10 flex-shrink-0">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-muted-foreground">{feature.description}</p>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                    <p className="text-muted-foreground">{feature.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* Demo Section */}
+        <section className="section">
+          <div className="container">
+            <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-in">
+              <span className="text-sm text-primary font-medium uppercase tracking-wider">
+                System Preview
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">
+                Dashboard & Reports
+              </h2>
+              <p className="text-muted-foreground">
+                Interactive visualizations and comprehensive reporting tools
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Dashboard Mockup */}
+              <div className="animate-fade-in">
+                <div className="glass-card p-6 rounded-xl">
+                  <h3 className="text-xl font-semibold mb-4">Interactive Dashboard</h3>
+                  <div className="aspect-video bg-gradient-to-br from-primary/10 to-sea-light/20 rounded-lg flex items-center justify-center">
+                    <div className="text-center">
+                      <Map className="h-16 w-16 text-primary mx-auto mb-2" />
+                      <p className="text-muted-foreground">Live Map Interface</p>
+                      <p className="text-sm text-muted-foreground">NDVI Visualization & Analysis</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Reports Mockup */}
+              <div className="animate-fade-in" style={{ animationDelay: "200ms" }}>
+                <div className="glass-card p-6 rounded-xl">
+                  <h3 className="text-xl font-semibold mb-4">Comparative Reports</h3>
+                  <div className="aspect-video bg-gradient-to-br from-sea-light/20 to-primary/10 rounded-lg flex items-center justify-center">
+                    <div className="text-center">
+                      <BarChart3 className="h-16 w-16 text-primary mx-auto mb-2" />
+                      <p className="text-muted-foreground">Monthly Trend Analysis</p>
+                      <p className="text-sm text-muted-foreground">Environmental Change Detection</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="text-center mt-8">
+              <Button asChild size="lg" className="btn-primary">
+                <Link to="/gallery">
+                  <Eye className="mr-2 h-4 w-4" />
+                  View Screenshots
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+        
+        {/* Technology Section */}
+        <section className="section bg-card">
+          <div className="container">
+            <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-in">
+              <span className="text-sm text-primary font-medium uppercase tracking-wider">
+                Technology Stack
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">
+                Built with Industry-Leading Tools
+              </h2>
+              <p className="text-muted-foreground">
+                Leveraging the best geospatial and data science technologies for reliable monitoring
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+              {technologies.map((tech, index) => (
+                <div 
+                  key={index} 
+                  className="glass-card p-4 rounded-lg text-center animate-fade-in"
+                  style={{ animationDelay: `${(index + 1) * 100}ms` }}
+                >
+                  <p className="font-medium">{tech}</p>
                 </div>
               ))}
             </div>
@@ -259,34 +245,20 @@ export default function Index() {
           <div className="container">
             <div className="max-w-3xl mx-auto text-center animate-fade-in">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                {t.home.cta.title}
+                Ready to Monitor Your Environment?
               </h2>
               <p className="text-muted-foreground mb-8">
-                {t.home.cta.description}
+                Get started with automated satellite monitoring and environmental analysis for your project area
               </p>
-              <Button asChild size="lg" className="btn-primary">
-                <Link to="/booking">{t.home.cta.bookNow}</Link>
-              </Button>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Button asChild size="lg" className="btn-primary min-w-[200px]">
+                  <Link to="/contact">Get Started</Link>
+                </Button>
+                <Button asChild variant="outline" size="lg" className="min-w-[200px]">
+                  <Link to="/gallery">View Demo <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                </Button>
+              </div>
             </div>
-          </div>
-          
-          {/* Decorative waves */}
-          <div className="absolute bottom-0 left-0 right-0 h-24 overflow-hidden">
-            <svg 
-              className="absolute bottom-0 w-full h-24 fill-background"
-              preserveAspectRatio="none"
-              viewBox="0 0 1440 74"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path 
-                d="M0,37.1L40,34.5C80,32,160,27,240,29.6C320,32,400,42,480,42.9C560,44,640,35,720,32.1C800,30,880,34,960,40.8C1040,47,1120,56,1200,56.6C1280,57,1360,48,1400,43.3L1440,39.1L1440,74L1400,74C1360,74,1280,74,1200,74C1120,74,1040,74,960,74C880,74,800,74,720,74C640,74,560,74,480,74C400,74,320,74,240,74C160,74,80,74,40,74L0,74Z"
-                className="animate-wave opacity-50"
-              />
-              <path 
-                d="M0,37.1L40,34.5C80,32,160,27,240,29.6C320,32,400,42,480,42.9C560,44,640,35,720,32.1C800,30,880,34,960,40.8C1040,47,1120,56,1200,56.6C1280,57,1360,48,1400,43.3L1440,39.1L1440,74L1400,74C1360,74,1280,74,1200,74C1120,74,1040,74,960,74C880,74,800,74,720,74C640,74,560,74,480,74C400,74,320,74,240,74C160,74,80,74,40,74L0,74Z"
-                className="animate-wave opacity-100 [animation-delay:-4s]"
-              />
-            </svg>
           </div>
         </section>
       </main>

@@ -1,13 +1,11 @@
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Play, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function HeroSection() {
-  const { t } = useLanguage();
   const [scrollY, setScrollY] = useState(0);
   
   useEffect(() => {
@@ -25,40 +23,48 @@ export default function HeroSection() {
   
   return (
     <section className="relative h-screen overflow-hidden">
-      {/* Background image with parallax */}
+      {/* Background image with parallax - satellite/earth monitoring theme */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1615571022219-eb45cf7faa9d?q=80&w=1920&auto=format&fit=crop')",
+          backgroundImage: "url('https://images.unsplash.com/photo-1446776876090-4e3b6e3b8d3c?q=80&w=1920&auto=format&fit=crop')",
           transform: `translateY(${backgroundY}px)`,
           backgroundPosition: `center ${50 + scrollY * 0.05}%`
         }}
       />
       
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60" />
       
       {/* Content */}
       <div
         className="relative h-full flex flex-col justify-center items-center text-center px-4"
         style={{ transform: `translateY(${contentY}px)` }}
       >
-        <div className="max-w-3xl animate-fade-in">
+        <div className="max-w-4xl animate-fade-in">
           <span className="inline-block text-white/90 text-lg mb-4 tracking-wide border-b border-white/30 pb-2">
-            {t.hero.subtitle}
+            AI-Powered Environmental Intelligence
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            {t.hero.title}
+            Automated Environmental Monitoring with{" "}
+            <span className="text-primary">Satellite Imagery</span>
           </h1>
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            {t.hero.description}
+          <p className="text-lg text-white/90 mb-8 max-w-3xl mx-auto">
+            Tracking vegetation, soil, and water changes using AI & remote sensing. 
+            Get monthly automated reports on environmental conditions with NDVI analysis and trend detection.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button asChild size="lg" variant="heroSolid" className="min-w-[200px] rounded-full transform transition-all duration-300 hover:translate-y-[-2px]">
-              <Link to="/booking">{t.hero.bookStay}</Link>
+              <Link to="/gallery">
+                <Play className="mr-2 h-4 w-4" />
+                View Demo
+              </Link>
             </Button>
             <Button asChild variant="hero" size="lg" className="min-w-[200px] rounded-full transform transition-all duration-300 hover:translate-y-[-2px]">
-              <Link to="/apartments">{t.hero.exploreApartments}</Link>
+              <Link to="/contact">
+                Get Started
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
           </div>
         </div>
@@ -67,10 +73,10 @@ export default function HeroSection() {
       {/* Scroll down indicator */}
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
         <a 
-          href="#welcome" 
+          href="#how-it-works" 
           className="flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity"
         >
-          <span className="text-sm mb-2">{t.hero.scrollDown}</span>
+          <span className="text-sm mb-2">Learn How It Works</span>
           <ChevronDown className="h-6 w-6" />
         </a>
       </div>

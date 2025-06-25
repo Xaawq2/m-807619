@@ -1,210 +1,130 @@
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { X } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
-
-// Sample gallery images
-const galleryImages = [
-  {
-    id: 1,
-    src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop",
-    alt: "Beachfront view",
-    category: "exterior"
-  },
-  {
-    id: 2,
-    src: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop",
-    alt: "Luxury suite interior",
-    category: "rooms"
-  },
-  {
-    id: 3,
-    src: "https://images.unsplash.com/photo-1584132905271-512c958d674a?w=800&h=600&fit=crop",
-    alt: "Swimming pool",
-    category: "amenities"
-  },
-  {
-    id: 4,
-    src: "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=800&h=600&fit=crop",
-    alt: "Premium apartment",
-    category: "rooms"
-  },
-  {
-    id: 5,
-    src: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=800&h=600&fit=crop",
-    alt: "Beach sunset",
-    category: "exterior"
-  },
-  {
-    id: 6,
-    src: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&h=600&fit=crop",
-    alt: "Dining area",
-    category: "amenities"
-  },
-  {
-    id: 7,
-    src: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&h=600&fit=crop",
-    alt: "Bathroom",
-    category: "rooms"
-  },
-  {
-    id: 8,
-    src: "https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&h=600&fit=crop",
-    alt: "Beach pathway",
-    category: "exterior"
-  },
-  {
-    id: 9,
-    src: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800&h=600&fit=crop",
-    alt: "Restaurant",
-    category: "amenities"
-  },
-  {
-    id: 10,
-    src: "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?w=800&h=600&fit=crop",
-    alt: "Bedroom",
-    category: "rooms"
-  },
-  {
-    id: 11,
-    src: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&h=600&fit=crop",
-    alt: "Beach umbrellas",
-    category: "exterior"
-  },
-  {
-    id: 12,
-    src: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&h=600&fit=crop",
-    alt: "Spa",
-    category: "amenities"
-  },
-];
+import { Satellite, TrendingUp, Map, BarChart3, Database, Calendar } from "lucide-react";
 
 export default function Gallery() {
   const { t } = useLanguage();
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const [filteredImages, setFilteredImages] = useState(galleryImages);
-  const [activeFilter, setActiveFilter] = useState("all");
   
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
   }, []);
   
-  // Filter gallery images by category
-  const filterGallery = (category: string) => {
-    setActiveFilter(category);
-    
-    if (category === "all") {
-      setFilteredImages(galleryImages);
-    } else {
-      setFilteredImages(galleryImages.filter(img => img.category === category));
+  // Demo screenshots and visualizations
+  const demoItems = [
+    {
+      title: "NDVI Analysis Dashboard",
+      description: "Real-time vegetation health monitoring with color-coded NDVI values",
+      icon: <TrendingUp className="h-6 w-6" />,
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+      category: "Dashboard"
+    },
+    {
+      title: "Satellite Imagery Comparison",
+      description: "Side-by-side monthly comparisons showing environmental changes",
+      icon: <Satellite className="h-6 w-6" />,
+      image: "https://images.unsplash.com/photo-1446776877081-d282a0f896e2?w=800&h=600&fit=crop",
+      category: "Analysis"
+    },
+    {
+      title: "Interactive Map Interface",
+      description: "User-friendly map with layered environmental data visualization",
+      icon: <Map className="h-6 w-6" />,
+      image: "https://images.unsplash.com/photo-1597149961639-83c53c7d9b95?w=800&h=600&fit=crop",
+      category: "Interface"
+    },
+    {
+      title: "Trend Analysis Charts",
+      description: "Statistical charts showing long-term environmental trends",
+      icon: <BarChart3 className="h-6 w-6" />,
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+      category: "Reports"
+    },
+    {
+      title: "Data Management System",
+      description: "Comprehensive database interface for historical data access",
+      icon: <Database className="h-6 w-6" />,
+      image: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=800&h=600&fit=crop",
+      category: "Database"
+    },
+    {
+      title: "Automated Reporting",
+      description: "Monthly reports generated automatically with key insights",
+      icon: <Calendar className="h-6 w-6" />,
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
+      category: "Reports"
     }
-  };
-  
-  // Handle lightbox navigation
-  const navigateGallery = (direction: "prev" | "next") => {
-    if (selectedImage === null) return;
-    
-    const currentIndex = filteredImages.findIndex(img => img.id === selectedImage);
-    let newIndex;
-    
-    if (direction === "prev") {
-      newIndex = currentIndex > 0 ? currentIndex - 1 : filteredImages.length - 1;
-    } else {
-      newIndex = currentIndex < filteredImages.length - 1 ? currentIndex + 1 : 0;
-    }
-    
-    setSelectedImage(filteredImages[newIndex].id);
-  };
-  
-  // Handle keyboard navigation for lightbox
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (selectedImage === null) return;
-      
-      if (e.key === "Escape") {
-        setSelectedImage(null);
-      } else if (e.key === "ArrowLeft") {
-        navigateGallery("prev");
-      } else if (e.key === "ArrowRight") {
-        navigateGallery("next");
-      }
-    };
-    
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedImage, filteredImages]);
+  ];
+
+  const categories = ["All", "Dashboard", "Analysis", "Interface", "Reports", "Database"];
   
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-1 pt-20">
-        {/* Header Section */}
-        <section className="relative py-20 bg-gradient-to-r from-sea-light to-white dark:from-sea-dark dark:to-background overflow-hidden">
-          <div className="container relative z-10">
-            <div className="max-w-3xl mx-auto text-center animate-fade-in">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                {t.gallery.title}
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="relative py-20 bg-gradient-to-r from-primary/10 to-sea-light/20 dark:from-primary/20 dark:to-sea-dark/20">
+          <div className="container relative z-10 pt-20">
+            <div className="text-center max-w-3xl mx-auto">
+              <span className="text-sm text-primary font-medium uppercase tracking-wider">
+                System Demo
+              </span>
+              <h1 className="text-4xl md:text-5xl font-bold mt-2 mb-6">
+                Dashboard & Visualization Gallery
               </h1>
-              <p className="text-muted-foreground text-lg mb-6">
-                {t.gallery.subtitle}
+              <p className="text-muted-foreground">
+                Explore our interactive environmental monitoring platform through screenshots and demo visualizations
               </p>
             </div>
           </div>
-          
-          {/* Decorative elements */}
-          <div className="absolute top-0 right-0 w-1/3 h-full opacity-10">
-            <div className="absolute top-10 right-10 w-64 h-64 rounded-full bg-primary/50 blur-3xl" />
-            <div className="absolute bottom-10 right-40 w-48 h-48 rounded-full bg-sea-light blur-3xl" />
-          </div>
         </section>
         
-        {/* Gallery Filters */}
-        <section className="py-8">
+        {/* Gallery Grid */}
+        <section className="py-16">
           <div className="container">
-            <div className="flex flex-wrap justify-center gap-2 mb-8 animate-fade-in">
-              {["all", "exterior", "rooms", "amenities"].map((category) => (
+            {/* Category Filter */}
+            <div className="flex flex-wrap justify-center gap-2 mb-12">
+              {categories.map((category) => (
                 <button
                   key={category}
-                  onClick={() => filterGallery(category)}
-                  className={cn(
-                    "px-6 py-2 rounded-full transition-all",
-                    activeFilter === category
-                      ? "bg-primary text-white shadow-lg"
-                      : "bg-card hover:bg-muted"
-                  )}
+                  className="px-4 py-2 rounded-full border border-primary/20 text-sm font-medium transition-colors hover:bg-primary hover:text-white"
                 >
-                  {category === "all" 
-                    ? t.gallery.filters.all 
-                    : category === "exterior" 
-                      ? t.gallery.filters.exterior 
-                      : category === "rooms" 
-                        ? t.gallery.filters.rooms 
-                        : t.gallery.filters.amenities}
+                  {category}
                 </button>
               ))}
             </div>
             
             {/* Gallery Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {filteredImages.map((image, index) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {demoItems.map((item, index) => (
                 <div 
-                  key={image.id} 
-                  className="relative overflow-hidden rounded-xl aspect-[4/3] cursor-pointer group animate-fade-in"
-                  style={{ animationDelay: `${index * 50}ms` }}
-                  onClick={() => setSelectedImage(image.id)}
+                  key={index} 
+                  className="group glass-card rounded-xl overflow-hidden shadow-lg transition-transform hover:scale-105 animate-fade-in"
+                  style={{ animationDelay: `${(index + 1) * 100}ms` }}
                 >
-                  <img 
-                    src={image.src} 
-                    alt={image.alt}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <p className="text-white">{image.alt}</p>
+                  <div className="aspect-video relative overflow-hidden">
+                    <img 
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover transition-transform group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-4 left-4 text-white">
+                      <div className="flex items-center mb-2">
+                        {item.icon}
+                        <span className="ml-2 text-sm bg-primary/80 px-2 py-1 rounded-full">
+                          {item.category}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                    <p className="text-muted-foreground text-sm">{item.description}</p>
                   </div>
                 </div>
               ))}
@@ -212,48 +132,39 @@ export default function Gallery() {
           </div>
         </section>
         
-        {/* Lightbox */}
-        {selectedImage !== null && (
-          <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 animate-fade-in">
-            <button 
-              className="absolute top-4 right-4 text-white p-2 rounded-full hover:bg-white/10 transition-colors"
-              onClick={() => setSelectedImage(null)}
-            >
-              <X className="h-6 w-6" />
-              <span className="sr-only">Close</span>
-            </button>
-            
-            <button 
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-white p-4 rounded-full hover:bg-white/10 transition-colors"
-              onClick={() => navigateGallery("prev")}
-            >
-              <span className="sr-only">Previous</span>
-              <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            
-            <div className="max-w-5xl max-h-[80vh] overflow-hidden">
-              {filteredImages.find(img => img.id === selectedImage) && (
-                <img 
-                  src={filteredImages.find(img => img.id === selectedImage)?.src} 
-                  alt={filteredImages.find(img => img.id === selectedImage)?.alt}
-                  className="max-w-full max-h-[80vh] object-contain"
-                />
-              )}
+        {/* Features Highlight */}
+        <section className="py-16 bg-card">
+          <div className="container">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <h2 className="text-3xl font-bold mb-4">
+                Key Visualization Features
+              </h2>
+              <p className="text-muted-foreground">
+                Our platform provides comprehensive tools for environmental data analysis and monitoring
+              </p>
             </div>
             
-            <button 
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white p-4 rounded-full hover:bg-white/10 transition-colors"
-              onClick={() => navigateGallery("next")}
-            >
-              <span className="sr-only">Next</span>
-              <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="glass-card p-6 rounded-xl text-center">
+                <TrendingUp className="h-12 w-12 text-primary mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-2">NDVI Mapping</h3>
+                <p className="text-muted-foreground">Real-time vegetation health visualization with detailed color mapping</p>
+              </div>
+              
+              <div className="glass-card p-6 rounded-xl text-center">
+                <BarChart3 className="h-12 w-12 text-primary mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Trend Analysis</h3>
+                <p className="text-muted-foreground">Statistical charts showing environmental changes over time</p>
+              </div>
+              
+              <div className="glass-card p-6 rounded-xl text-center">
+                <Map className="h-12 w-12 text-primary mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Interactive Maps</h3>
+                <p className="text-muted-foreground">User-friendly interface with multi-layer environmental data</p>
+              </div>
+            </div>
           </div>
-        )}
+        </section>
       </main>
       
       <Footer />

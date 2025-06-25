@@ -53,15 +53,23 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				earth: {
+					green: '#2D5016',
+					lightGreen: '#7CB342',
+					brown: '#5D4037',
+					lightBrown: '#8D6E63',
+					blue: '#1976D2',
+					lightBlue: '#42A5F5'
+				},
 				sea: {
-					light: '#E0F2F7',
-					DEFAULT: '#1E88E5',
+					light: '#E3F2FD',
+					DEFAULT: '#1976D2',
 					dark: '#0D47A1'
 				},
-				sand: {
-					light: '#F5F5DC',
-					DEFAULT: '#E6D2B5',
-					dark: '#D2B48C'
+				forest: {
+					light: '#C8E6C9',
+					DEFAULT: '#2E7D32',
+					dark: '#1B5E20'
 				}
 			},
 			borderRadius: {
@@ -112,9 +120,9 @@ export default {
 					'100%': { transform: 'translateX(-50%) translateZ(0) scaleY(1)' }
 				},
 				'button-glow': {
-					'0%': { boxShadow: '0 0 5px rgba(30, 136, 229, 0.5)' },
-					'50%': { boxShadow: '0 0 20px rgba(30, 136, 229, 0.8)' },
-					'100%': { boxShadow: '0 0 5px rgba(30, 136, 229, 0.5)' }
+					'0%': { boxShadow: '0 0 5px rgba(45, 80, 22, 0.5)' },
+					'50%': { boxShadow: '0 0 20px rgba(45, 80, 22, 0.8)' },
+					'100%': { boxShadow: '0 0 5px rgba(45, 80, 22, 0.5)' }
 				}
 			},
 			animation: {
